@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.korea.domain.testDTO;
 
+import lombok.extern.log4j.Log4j;
+
 /**
  * Handles requests for the application home page.
  */
 @Controller
+@Log4j
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -40,7 +43,7 @@ public class HomeController {
 		dto.setName("È«±æµ¿");
 		dto.setAddr("´ë±¸±¤¿ª½Ã");
 		dto.setAge("50");
-		System.out.println(dto);
+		log.info("dto : " + dto);
 		
 		return "home";
 	}
