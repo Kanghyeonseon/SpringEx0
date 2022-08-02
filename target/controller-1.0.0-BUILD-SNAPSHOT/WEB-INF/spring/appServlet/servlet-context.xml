@@ -25,6 +25,6 @@
 	
 	<context:component-scan base-package="com.korea.controller" />
 	
-	<mybatis-spring:scan base-package="com.korea.mapper"></mybatis-spring:scan>
+	 
 	
 </beans:beans>

@@ -21,4 +21,9 @@ public class MybatisSpring {
 		log.info("애너테이션방식 : " + timeMapper.getTime());
 		log.info("XML : " + timeMapper.getTime2());
 	}
+	
+	@Test
+	public void test2() {
+		String time = timeMapper.getTime2();
+	}
 }
