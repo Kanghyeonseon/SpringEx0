@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.korea.domain.SampleDTO;
 
@@ -27,8 +28,15 @@ public class SampleController {
 		log.info("URL : test3");
 	}
 	@GetMapping("/test4")
-	public String test4(SampleDTO dto) {
-		log.info("dto toString()" + dto.toString());
-		return "test4.html";
+	public void test4(@RequestParam("name") String name, @RequestParam("age") Integer age) {
+		log.info("URL : test4");
+		log.info("name : " + name +", age : " + age);
+	}
+	@GetMapping("/test5")
+	public void test5(@RequestParam("name") String[] list) {
+		log.info("URL : test5");
+		for(String str : list) {
+			log.info(str + " ");
+		}
 	}
 }
