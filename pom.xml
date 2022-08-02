@@ -97,6 +97,15 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
+		<!--
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>servlet-api</artifactId>
+		    <version>3.0-alpha-1</version>
+		    <scope>provided</scope>
+		</dependency>
+		-->
+		
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
@@ -176,18 +185,15 @@
 		    <version>5.0.7.RELEASE</version>
 		</dependency>
 		
+		
+		
 		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4 -->
 		<dependency>
 		    <groupId>org.bgee.log4jdbc-log4j2</groupId>
 		    <artifactId>log4jdbc-log4j2-jdbc4</artifactId>
 		    <version>1.16</version>
 		</dependency>
-
-
-
-
-
-  
+		
 	</dependencies>
     <build>
         <plugins>
