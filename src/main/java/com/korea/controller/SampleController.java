@@ -26,4 +26,9 @@ public class SampleController {
 	public void test3(SampleDTO dto) {
 		log.info("URL : test3");
 	}
+	@GetMapping("/test4")
+	public String test4(SampleDTO dto) {
+		log.info("dto toString()" + dto.toString());
+		return "test4.html";
+	}
 }
