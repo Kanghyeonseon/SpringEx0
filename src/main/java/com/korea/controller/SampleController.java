@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.korea.domain.SampleDTO;
+import com.korea.domain.SampleDTOList;
+import com.korea.domain.TodoDTO;
+import com.korea.domain.TodoDTO2;
 
 import lombok.extern.log4j.Log4j;
 
@@ -39,4 +42,29 @@ public class SampleController {
 			log.info(str + " ");
 		}
 	}
+	@GetMapping("/test6")
+	public void test6(SampleDTOList list) {
+		log.info("URL : test6");
+		for(SampleDTO dto : list.getList()) {
+			log.info(dto + " ");
+		}
+	}
+
+	/*
+	 * @InitBinder public void initBinder(WebDataBinder binder) { SimpleDateFormat
+	 * df = new SimpleDateFormat("yyyy-mm-dd");
+	 * binder.registerCustomEditor(java.util.Date.class, new CustomDateEditor(df,
+	 * false)); }
+	 */
+	@GetMapping("/test7")
+	public void test7 (TodoDTO tdto) {
+		log.info("URL : test7");
+		log.info(tdto);
+	}
+	@GetMapping("/test8")
+	public void test8 (TodoDTO2 tdto) {
+		log.info("URL : test8");
+		log.info(tdto);
+	}
+	
 }
