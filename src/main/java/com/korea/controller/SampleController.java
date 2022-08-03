@@ -1,11 +1,18 @@
 package com.korea.controller;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.korea.domain.BoardDTO;
 import com.korea.domain.SampleDTO;
 import com.korea.domain.SampleDTOList;
 import com.korea.domain.TodoDTO;
@@ -66,5 +73,104 @@ public class SampleController {
 		log.info("URL : test8");
 		log.info(tdto);
 	}
+	
+	@GetMapping("/test9")
+	public void test9 (SampleDTO dto, Model model) {
+		log.info("URL : test9");
+		log.info("dto : " + dto);
+		model.addAttribute("dto", dto);
+	}
+	
+	@GetMapping("/test10")
+	public String test10 () {
+		log.info("URL : /test10");
+		return "/test10";
+	}
+	
+	// 포워드 방식
+	@GetMapping("/forward")
+	public String Forward (SampleDTO dto, Model model) {
+		log.info("URL : /forward...");
+		model.addAttribute("dto", dto);
+		return "forward:result"; // 현재위치를 기준으로 상대경로로 보낸다. 절대경로라면 /sample/result로 입력해야함.
+	}
+	
+	@GetMapping("/result")
+	public void result (Model model) {
+		log.info("URL : /result...");
+		BoardDTO dto = new BoardDTO().builder()
+				.no(1010)
+				.content("내용")
+				.writer("admin")
+				.build();
+		model.addAttribute("board", dto);
+	}
+	
+	// 리다이렉트 방식
+	@GetMapping("/redirect")
+	public String Redirect (SampleDTO dto, RedirectAttributes rttr) {
+		log.info("URL : /redirect...");
+		// model.addAttribute("dto", dto);
+		rttr.addFlashAttribute("dto", dto);
+		return "redirect:result"; // 현재위치를 기준으로 상대경로로 보낸다. 절대경로라면 /sample/result로 입력해야함.
+	}
+	
+	// void 타입
+	@GetMapping("/voidtest")
+	public void testfunc() {
+		log.info("void 테스트 페이지...");
+	}
+	
+	// String 타입
+	@GetMapping("/stringtest")
+	public String testfunc2(@RequestParam("Page") Integer page) {
+		log.info("string 테스트 페이지..");
+		if(page==1) {
+			return "/sample/one";
+		} else {
+			return "/sample/two";
+		}
+	}
+	
+	// 객체 타입
+	@GetMapping("/objectTest")
+	public @ResponseBody SampleDTO testfunc3() {
+		SampleDTO dto = new SampleDTO();
+		dto.setAge(10);
+		dto.setName("홍길동");
+		return dto;
+	}
+	
+	
+	
+	// ResponseEntity 타입
+	@GetMapping("/responseEntityTest")
+	public ResponseEntity<String> testfunc4() {
+		log.info("response Entity 타입...");
+		HttpHeaders header = new HttpHeaders();
+		header.add("content-Type", "application/json;charset=UTF-8");
+		
+		SampleDTO dto = new SampleDTO();
+		dto.setAge(10);
+		dto.setName("홍길동");
+		
+		return new ResponseEntity<String>(dto.toString(), header, HttpStatus.OK);
+	}
+	
+	// 에러
+	@GetMapping("/errortest")
+	public String errortest (SampleDTO dto, Model model) {
+		model.addAttribute("dto", dto);
+		return "/sample/voidtest";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
